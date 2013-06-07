@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title >OZZMAP</title>
+{% endblock title %}
+{% block extra_head %}
+
+
+{% endblock extra_head %}
+{% block content %}
+{% load increment_filter %}
+      <div class="container">
+
+        <div id="notifications">
+        </div>
+
+        <ul class="breadcrumb">
+            <li class='active'>Records</li>
+
+        </ul>
+
+        <div class="row">
+            <div class="span12 ">
+
+
+                <div id="simple-search-form">
+                    
+                        <span>&nbsp;&nbsp;</span>
+                        <form id='field_db' class="well form-search upform" action='/records/' method='post' name='field_data'>
+                        {% csrf_token %}
+                        <select name='database' id='database'>
+                            <option value=0>--select database--</option>
+                            {% for d in databases%}
+                            <option value="{{d.id}}">{{d.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                    </form>
+
+                <script>
+                    $(document).ready(function(){
+                        $("#database").val({{ value }})
+                        $("#database").change(function(){
+                            $("#field_db").trigger('submit')
+                        
+                        })
+                        $("#field_db").submit(function(){})
+                    })
+                </script>
+                </div>
+
+
+
+            {% for t in tables %}
+                
+                <table style="width:50%" class="table table-bordered">
+                    
+                    <tr>
+                        <th style="width:5px;" > #</th>
+                        <th>Database Name</th>
+                        <th>Table Name</th>
+                        <th>Record</th>
+                    </tr>
+{% for record in records %}
+                    {% if t.name == record.table.name %}
+        
+                    <tr>
+                        <td >{% increment i %}{{i}} <span class="{{ t.name}}">&nbsp;&nbsp;&nbsp;&nbsp; </span> </td>
+                        <td> {{t.name}} </td>
+                        <td> {{ t.db}} </td>
+                        <td>  {{ record.record }}  </td>
+
+                    </tr>
+                    {% endif %}
+        {% endfor %}
+      
+                    <div class="alert alert-block alert-info">
+
+                       {{t.name}}
+                    </div>
+      
+                </table>
+                
+ 
+  {% endfor %}
+                <br />
+
+
+                <style>
+                    .ship_status li {list-style: none;float: left;padding:0px 0px 0px 65px;font-weight:bold;font-size:13px;}
+                    .ship_status li a{color:#333;}
+                </style>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML >
+<html lang="en-us">
+<head>
+    <title>Database Scraping</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/static/jquery/ui-lightness/jquery-ui-1.10.2.custom.css" />
+    <script src="/static/jquery/jquery-1.9.1.js"></script>
+    <script src="/static/jquery/jquery-ui-1.10.1.custom.min.js"></script>
+    <script src="/static/jquery/jquery.validate.js"></script>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .error{
+            color: #bd4247;
+        }
+    </style>
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="wrapper">
+    <div class="navbar ">
+        <div class="navbar-inner ">
+            <div class="container ">
+                <a class='brand' href='#'>Database Scraping</a>
+                </li>
+                </ul>
+                <ul class="nav pull-right">
+                    <!-- Admin menu here -->
+                    <li class=""><a href="/">Database</a></li>
+                    <li class=""><a href="/tables/">Tables</a></li>
+                    <li class=""><a href="/records/">Records</a></li>
+                    <li class=""><a href="/fields/">Fields</a></li>
+                    <li class=""></li>
+
+
+
+
+
+                </ul>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    {% block content %}{% endblock %}
+</div>
+<footer>
+  Database Scraping
+</footer>
+</body>
+</html>

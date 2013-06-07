@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title >Database Scraping</title>
+{% endblock title %}
+{% block extra_head %}
+
+
+{% endblock extra_head %}
+{% block content %}
+
+      <div class="container">
+
+        <div id="notifications">
+        </div>
+
+        
+        <div class="row">
+            <div class="span12 ">
+
+
+                <div id="simple-search-form">
+                    <form  action="/dbadd/" enctype="multipart/form-data" method='post' class="well form-search upform" id="shipment_search" ><div style="margin:0;padding:0;display:inline"></div>
+                            {% csrf_token %}
+                             {% if form.errors %} <p class="errorlist">Please correct the errors below</p> {% endif %}
+              
+                          
+          <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_name">Name:</label>
+              <input type="text" class="input-xlarge" id="id_name" name="name">
+              
+            </div>
+          </div>
+            <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_type">Database type:</label>
+              <select  id="id_type" name="type">
+                <option value='SC'>-Select-</option>
+                <option value='SQ'>Sqlite</option>
+                <option value='MY'>Mysql</option>
+              </select>
+              
+            </div>
+          </div>
+            <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_user">Database User:</label>
+              <input type="text" class="input-xlarge" id="id_user" name="user">
+              
+            </div>
+          </div>
+            <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_passwd">Database Password:</label>
+              <input type="password" class="input-xlarge" id="id_passwd" name="passwd">
+              
+            </div>
+          </div>
+            <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_host">Host:</label>
+              <input type="text" class="input-xlarge" id="id_host" name="host">
+              
+            </div>
+          </div>
+            <div class="control-group">
+            
+            <div class="controls">
+              <label class="control-label" for="id_path">Path:</label>
+              <input type="file" class="input-xlarge" id="id_path" name='path'>
+              
+            </div>
+          </div>
+                            <br><button type="submit" class="btn" >Submit</button> &nbsp;&nbsp;
+
+                    </form>
+                    <script>
+                        $(document).ready(function(){
+                            $("#shipment_search").validate({
+                                               rules: {
+                                                  user: "required",
+                                                  passwd: "required",
+                                                  name: "required",
+                                                  host: "required",
+                                                  type: {
+                                                      selectcheck: true
+                                                    },
+                                                  path: "required"
+                                               }
+                                              });
+                            jQuery.validator.addMethod('selectcheck', function (value) {
+                              
+        return (value != 'SC');
+    }, "This field is required");
+                            $("#id_type").change(function(){
+                                if (this.value=='SQ') {
+                                    $('#id_path').closest('.control-group').show()
+                                    $('#id_user').closest('.control-group').hide()
+                                    $('#id_passwd').closest('.control-group').hide()
+                                    $('#id_host').closest('.control-group').hide()
+                                }
+                                else{
+                                    $('#id_path').closest('.control-group').hide()
+                                    $('#id_user').closest('.control-group').show()
+                                    $('#id_passwd').closest('.control-group').show()
+                                    $('#id_host').closest('.control-group').show()
+                                }
+                            })
+                        })
+                    </script>
+
+                </div>
+
+<style>
+  .marg_data{
+    margin-left: 91px;
+  }
+  .controls{
+    width:50%;
+  }
+  .input-xlarge,#id_type{
+    float: right;
+  }
+</style>
+                
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
